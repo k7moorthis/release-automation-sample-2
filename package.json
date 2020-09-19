@@ -1,7 +1,7 @@
 {
   "name": "release-automation-sample-2",
   "productName": "ElectronApp",
-  "version": "0.0.0",
+  "version": "0.0.0-development",
   "private": true,
   "description": "My Electron application description",
   "author": {
@@ -18,7 +18,9 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --ext .ts .",
+    "prepare-release": "semantic-release --dry-run",
+    "release": "semantic-release"
   },
   "config": {
     "forge": {
@@ -76,6 +78,8 @@
     "@electron-forge/maker-zip": "6.0.0-beta.53",
     "@electron-forge/plugin-webpack": "6.0.0-beta.53",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
     "css-loader": "^4.2.1",
@@ -84,6 +88,7 @@
     "eslint-plugin-import": "^2.20.0",
     "fork-ts-checker-webpack-plugin": "^5.0.14",
     "node-loader": "^1.0.1",
+    "semantic-release": "^17.1.1",
     "style-loader": "^1.2.1",
     "ts-loader": "^8.0.2",
     "typescript": "^4.0.2"

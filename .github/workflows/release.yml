@@ -1,0 +1,148 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - stable
+      - rc
+
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node_version: [ 12.x ]
+        os: [ ubuntu-latest ]
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Determine npm cache location
+        id: npm-cache
+        run: echo "::set-output name=dir::$(npm config get cache)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        env:
+          cache-name: dependencies-cache
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Bump application version
+        run: node ./.scripts/bump-version.js
+
+      - name: Build application
+        run: npm run make
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        if: ${{ success() }}
+        with:
+          name: binaries
+          path: |
+            ./.release
+            ./out/make/**/*.exe
+            ./out/make/**/*.deb
+            ./out/make/**/*.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        node_version: [ 12.x ]
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install Linux packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends rename
+
+      - name: Determine npm cache location
+        id: npm-cache
+        run: echo "::set-output name=dir::$(npm config get cache)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        env:
+          cache-name: dependencies-cache
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: binaries
+
+      - name: Copy artifacts to one place and rename them
+        run: |
+          mkdir ./out/binaries
+          find ./out/ -regex ".*\.\(exe\|deb\|zip\)" -exec cp {} ./out/binaries \;
+          cd ./out/binaries
+          rename -v "s/[^\/]+\./$( cat ../../.release )./" *
+          rm ../../.release
+
+      - name: Configure GPG keys
+        env:
+          GPG_BINARIES_SIGNING_KEY: ${{ secrets.GPG_BINARIES_SIGNING_KEY }}
+          GPG_BINARIES_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_BINARIES_SIGNING_KEY_PASSPHRASE }}
+          GPG_GITHUB_SIGNING_KEY: ${{ secrets.GPG_GITHUB_SIGNING_KEY }}
+          GPG_GITHUB_SIGNING_KEY_ID: ${{ secrets.GPG_GITHUB_SIGNING_KEY_ID }}
+        run: |
+          mkdir -p ~/.gnupg/
+          printf "$GPG_BINARIES_SIGNING_KEY" | base64 --decode > ~/.gnupg/bin_sign_private.key
+          printf "$GPG_GITHUB_SIGNING_KEY" | base64 --decode > ~/.gnupg/gh_sign_private.key
+          gpg --pinentry-mode=loopback --passphrase "$GPG_BINARIES_SIGNING_KEY_PASSPHRASE" --import ~/.gnupg/bin_sign_private.key
+          gpg --import ~/.gnupg/gh_sign_private.key
+          printf "default-key $GPG_GITHUB_SIGNING_KEY_ID" > ~/.gnupg/gpg.conf
+
+      - name: Generate, sign and verify checksum for binaries
+        env:
+          GPG_BINARIES_SIGNING_KEY_PASSPHRASE: ${{ secrets.GPG_BINARIES_SIGNING_KEY_PASSPHRASE }}
+          GPG_BINARIES_SIGNING_KEY_ID: ${{ secrets.GPG_BINARIES_SIGNING_KEY_ID }}
+        run: |
+          cd ./out/binaries
+          sha256sum *.{exe,deb,zip} > SHA256SUMS || true
+          gpg --pinentry-mode=loopback -u "$GPG_BINARIES_SIGNING_KEY_ID" --passphrase "$GPG_BINARIES_SIGNING_KEY_PASSPHRASE" --armor --output SHA256SUMS.gpg --detach-sig SHA256SUMS
+          gpg --verify SHA256SUMS.gpg SHA256SUMS
+          sha256sum -c SHA256SUMS
+
+      - name: Release application
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIT_AUTHOR_NAME: Kesavamoorthi Subramanian
+          GIT_AUTHOR_EMAIL: k7moorthi@gmail.com
+          GIT_COMMITTER_NAME: Kesavamoorthi Subramanian
+          GIT_COMMITTER_EMAIL: k7moorthi@gmail.com
+        run: |
+          git config commit.gpgsign true
+          npx semantic-release
