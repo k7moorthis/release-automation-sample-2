@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/hyperweavers/release-automation-sample-2/compare/v1.1.0...v1.1.1) (2020-09-19)
+
+
+### Bug Fixes
+
+* add hot fix 1 ([#21](https://github.com/hyperweavers/release-automation-sample-2/issues/21)) ([85759fe](https://github.com/hyperweavers/release-automation-sample-2/commit/85759feb110143b7f2d19e67f9ee2df817a28559))
+
 # [1.1.0](https://github.com/hyperweavers/release-automation-sample-2/compare/v1.0.0...v1.1.0) (2020-09-19)
 
 
