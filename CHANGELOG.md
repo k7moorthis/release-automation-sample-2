@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/hyperweavers/release-automation-sample-2/compare/v1.0.0...v1.1.0) (2020-09-19)
+
+
+### Bug Fixes
+
+* add fix 2 ([#5](https://github.com/hyperweavers/release-automation-sample-2/issues/5)) ([ec6d80a](https://github.com/hyperweavers/release-automation-sample-2/commit/ec6d80aaa229cd9e141034dff2ee8198b13b45d2))
+* add fix 4 ([#13](https://github.com/hyperweavers/release-automation-sample-2/issues/13)) ([c7dfd34](https://github.com/hyperweavers/release-automation-sample-2/commit/c7dfd34c00b05d1c5c164826ea7a597c0067b7e7))
+
+
+### Features
+
+* add feature 3 ([#7](https://github.com/hyperweavers/release-automation-sample-2/issues/7)) ([7891ea6](https://github.com/hyperweavers/release-automation-sample-2/commit/7891ea6a6e6bf797ead5d2eb3df0e5f46e87534a))
+* add feature 4 ([#9](https://github.com/hyperweavers/release-automation-sample-2/issues/9)) ([061bb2a](https://github.com/hyperweavers/release-automation-sample-2/commit/061bb2ac1d8519c33813db6a355bc6ca3b670e62))
+* add feature 5 ([#11](https://github.com/hyperweavers/release-automation-sample-2/issues/11)) ([5367839](https://github.com/hyperweavers/release-automation-sample-2/commit/53678398d68dee0afdf065e0e812766910a2a76e))
+
 # [1.1.0-rc.1](https://github.com/hyperweavers/release-automation-sample-2/compare/v1.0.0...v1.1.0-rc.1) (2020-09-19)
 
 
