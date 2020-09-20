@@ -10,6 +10,14 @@ All notable changes to this project will be documented in this file. See
 
 * add hot fix 2 ([#32](https://github.com/hyperweavers/release-automation-sample-2/issues/32)) ([1e3dede](https://github.com/hyperweavers/release-automation-sample-2/commit/1e3deded2c6b2be59e9b61994982f706bdb943ed))
 
+## [1.1.3-rc.1](https://github.com/hyperweavers/release-automation-sample-2/compare/v1.1.2...v1.1.3-rc.1) (2020-09-20)
+
+
+### Bug Fixes
+
+* add fix 6 ([#19](https://github.com/hyperweavers/release-automation-sample-2/issues/19)) ([59790a3](https://github.com/hyperweavers/release-automation-sample-2/commit/59790a30f1055a3fe1dec1e961855c12552130c4))
+* add fix 8 ([#27](https://github.com/hyperweavers/release-automation-sample-2/issues/27)) ([2ce3986](https://github.com/hyperweavers/release-automation-sample-2/commit/2ce398605e5640435208aff0ef27f220ad46ce5c))
+
 ## [1.1.2](https://github.com/hyperweavers/release-automation-sample-2/compare/v1.1.1...v1.1.2) (2020-09-19)
 
 
