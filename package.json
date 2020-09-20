@@ -1,7 +1,7 @@
 {
   "name": "release-automation-sample-2",
   "productName": "ElectronApp",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "private": true,
   "description": "My Electron application description",
   "author": {
