@@ -1,16 +1,16 @@
 # Always validate the PR title, and ignore the commits
-titleOnly: true
+# titleOnly: true
 
 # Always validate all commits, and ignore the PR title
 # commitsOnly: false
 
 # Always validate the PR title AND all the commits
-# titleAndCommits: false
+titleAndCommits: true
 
 # Require at least one commit to be valid
 # this is only relevant when using commitsOnly: true or titleAndCommits: true,
 # which validate all commits by default
-# anyCommit: false
+anyCommit: true
 
 # You can define a list of valid scopes
 scopes:
@@ -42,8 +42,8 @@ scopes:
 
 # Allow use of Merge commits (eg on github: "Merge branch 'master' into feature/ride-unicorns")
 # this is only relevant when using commitsOnly: true (or titleAndCommits: true)
-# allowMergeCommits: true
+allowMergeCommits: true
 
 # Allow use of Revert commits (eg on github: "Revert "feat: ride unicorns"")
 # this is only relevant when using commitsOnly: true (or titleAndCommits: true)
-# allowRevertCommits: true
+allowRevertCommits: true
