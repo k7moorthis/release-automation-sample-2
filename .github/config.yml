@@ -13,7 +13,7 @@ newIssueWelcomeComment: >
 
 
   To help make this a smooth process, please be sure you have first read our
-  [guidelines for contributing](https://github.com/hyperweavers/Electron App/blob/master/CONTRIBUTING.md) 📖.
+  [guidelines for contributing](https://github.com/hyperweavers/release-automation-sample-2/blob/master/CONTRIBUTING.md) 📖.
 
 # Configuration for new-pr-welcome - https://github.com/behaviorbot/new-pr-welcome
 
@@ -23,7 +23,7 @@ newPRWelcomeComment: >
 
 
   To help make this a smooth process, please be sure you have first read our
-  [guidelines for contributing](https://github.com/hyperweavers/Electron App/blob/master/CONTRIBUTING.md) 📖.
+  [guidelines for contributing](https://github.com/hyperweavers/release-automation-sample-2/blob/master/CONTRIBUTING.md) 📖.
 
 # Configuration for first-pr-merge - https://github.com/behaviorbot/first-pr-merge
 
