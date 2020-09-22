@@ -18,7 +18,7 @@ lockLabel: false
 lockComment: >
   This issue has been automatically locked 🔒 since there has not been
   any recent activity after it was closed ⛔. If you can still reproduce
-  this issue then please open a [new issue](https://github.com/hyperweavers/Electron App/issues/new?template=bug_report.md)
+  this issue then please open a [new issue](https://github.com/hyperweavers/release-automation-sample-2/issues/new)
   to ensure that we have enough information to address your issue.
 
 
