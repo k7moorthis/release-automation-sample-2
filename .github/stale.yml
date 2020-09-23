@@ -11,7 +11,8 @@ daysUntilClose: 1
 onlyLabels: []
 
 # Issues or Pull Requests with these labels will never be considered stale. Set to `[]` to disable
-exemptLabels: []
+exemptLabels:
+  - help-wanted
 
 # Set to true to ignore issues in a project (defaults to false)
 exemptProjects: true
@@ -40,10 +41,12 @@ markComment: >
    1. Verify that you can still reproduce the issue in the latest version of
    Electron App
 
+
    2. Update the issue template with the following details:
-      * What version of Electron App you reproduced the issue on
-      * What OS and version you reproduced the issue on
-      * What steps you followed to reproduce the issue
+     * What version of Electron App you reproduced the issue on
+     * What OS and version you reproduced the issue on
+     * What steps you followed to reproduce the issue
+
 
    3. Comment that the issue is still reproducible
 
