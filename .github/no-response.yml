@@ -9,9 +9,9 @@ responseRequiredLabel: "needs: reply"
 # Comment to post when closing an Issue for lack of response. Set to `false` to disable
 closeComment: >
   👋 Thanks for your contribution! 🙌
-  
+   
   This issue is being closed due to the lack of a reply 💬. If this is still
   an issue with the latest version of Electron App, please create a [new issue](https://github.com/hyperweavers/release-automation-sample-2/issues/new)
   and ensure the template is fully filled out.
-  
+   
   🙏 Thank you for using Electron App! 🙏
